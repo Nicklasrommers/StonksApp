@@ -1,0 +1,11 @@
+ticker,name,asset_type,country,sector,risk_level,expense_ratio
+IUSQ,iShares MSCI ACWI UCITS ETF,ETF,Global,Diversified,3,0.0020
+SXR8,iShares Core S&P 500 UCITS ETF,ETF,USA,Diversified,3,0.0007
+EUNL,iShares Core MSCI World UCITS ETF,ETF,Global,Diversified,3,0.0020
+NDX,Nasdaq 100 ETF,ETF,USA,Technology,4,0.0020
+NOVO-B,Novo Nordisk,Stock,Denmark,Health Care,3,0.0000
+MSFT,Microsoft,Stock,USA,Technology,4,0.0000
+AAPL,Apple,Stock,USA,Technology,4,0.0000
+JNJ,Johnson & Johnson,Stock,USA,Health Care,2,0.0000
+VWS,Vestas Wind Systems,Stock,Denmark,Energy,5,0.0000
+MAERSK-B,A.P. Moller Maersk,Stock,Denmark,Industrials,4,0.0000

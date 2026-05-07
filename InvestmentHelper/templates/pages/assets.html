@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% from 'components/macros.html' import asset_filter_form, asset_card %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/assets.css') }}">
+{% endblock %}
+
+{% block title %}Assets{% endblock %}
+
+{% block content %}
+    <h2>Find Investments</h2>
+    <h3 class="text--gray">Filter the small asset universe used by the recommendation tool.</h3>
+    {{ asset_filter_form(form=form) }}
+
+    <div class="assets">
+        {% if assets|length %}
+            {% for asset in assets %}
+                {{ asset_card(asset=asset) }}
+            {% endfor %}
+        {% else %}
+            <h3 class="text--gray">Use the filters above to search for assets.</h3>
+        {% endif %}
+    </div>
+{% endblock %}

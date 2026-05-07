@@ -1,0 +1,88 @@
+{% macro cta_button (class='') %}
+    <a class="btn {{ class }}" href="{{ url_for('Investment.recommendations') }}">
+        <span>Generate suggestion</span>
+    </a>
+{% endmacro %}
+
+
+{% macro form_errors (errors=[]) %}
+    {% for error in errors %}
+        <span class="text--red">{{ error }}</span>
+    {% endfor %}
+{% endmacro %}
+
+
+{% macro asset_filter_form (form=None, include_amount=False, clear_endpoint='Investment.assets') %}
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        {% if include_amount %}
+            <div class="form-group">
+                {{ form.amount.label }}
+                {{ form.amount }}
+                {{ form_errors(form.amount.errors) }}
+            </div>
+        {% endif %}
+
+        <div class="form--row">
+            <div class="form-group">
+                {{ form.asset_type.label }}
+                {{ form.asset_type }}
+            </div>
+
+            <div class="form-group">
+                {{ form.country.label }}
+                {{ form.country }}
+            </div>
+
+            <div class="form-group">
+                {{ form.sector.label }}
+                {{ form.sector }}
+            </div>
+        </div>
+
+        <div class="form--row">
+            <div class="form-group">
+                {{ form.risk_level.label }}
+                {{ form.risk_level }}
+            </div>
+
+            <div class="form-group">
+                {{ form.search_pattern.label }}
+                {{ form.search_pattern(placeholder='e.g. tech|novo|msci') }}
+                {{ form_errors(form.search_pattern.errors) }}
+            </div>
+
+            {{ form.submit(class="btn") }}
+            <a href="{{ url_for(clear_endpoint) }}" class="btn">Clear</a>
+        </div>
+    </form>
+{% endmacro %}
+
+
+{% macro asset_card (asset=None) %}
+    <div class="card">
+        <div class="card__info">
+            <h3>{{ asset.ticker }}</h3>
+            <p>{{ asset.name }}</p>
+            <p>Type: {{ asset.asset_type|format_data }}</p>
+            <p>Country: {{ asset.country }}</p>
+            <p>Sector: {{ asset.sector }}</p>
+            <p>Risk: {{ asset.risk_level }}/5</p>
+            <p>Expense ratio: {{ asset.expense_ratio }}</p>
+        </div>
+    </div>
+{% endmacro %}
+
+
+{% macro recommendation_row (item=None) %}
+    <tr>
+        <td>{{ item.ticker }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.asset_type|format_data }}</td>
+        <td>{{ item.country }}</td>
+        <td>{{ item.sector }}</td>
+        <td>{{ item.risk_level }}/5</td>
+        <td>{{ "%.2f"|format(item.allocated_amount) }}</td>
+    </tr>
+{% endmacro %}

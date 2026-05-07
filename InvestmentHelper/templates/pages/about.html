@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h1>About Investment Helper</h1>
+    <p>
+        This prototype was built for the DIS database project. It keeps the domain intentionally small:
+        a table of assets, a table of recommendation requests, and generated recommendation items.
+    </p>
+    <p>
+        The search field supports PostgreSQL regular expressions, so patterns like <code>tech|health</code>
+        can match asset names, tickers or sectors.
+    </p>
+{% endblock %}

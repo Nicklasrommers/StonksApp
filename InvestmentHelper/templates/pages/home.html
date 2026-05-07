@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% from 'components/macros.html' import cta_button %}
+
+{% block title %}Investment Helper{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero__text">
+            <h1>Investment Helper</h1>
+            <p class="text--gray">
+                A small database-backed tool that suggests a simple investment split from amount, risk and filters.
+            </p>
+            {{ cta_button() }}
+        </div>
+    </section>
+
+    <section>
+        <h2>What the app does</h2>
+        <p>
+            The app stores investment assets in PostgreSQL, lets users filter them with SQL including regex matching,
+            and saves recommendation requests with the generated allocation.
+        </p>
+    </section>
+{% endblock %}
