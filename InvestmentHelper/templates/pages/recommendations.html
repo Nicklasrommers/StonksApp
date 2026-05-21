@@ -7,9 +7,24 @@
     <h2>Generate Investment Suggestion</h2>
     <h3 class="text--gray">Enter an amount and preferences. The app stores your request and returns up to four matching assets.</h3>
 
-    {{ asset_filter_form(form=form, include_amount=True, clear_endpoint='Investment.recommendations') }}
+    {{ asset_filter_form(form=form, include_amount=True, clear_endpoint='investment.recommendations') }}
 
     {% if recommendations|length %}
+        <div class="summary">
+            <div>
+                <span class="summary__label">Total allocated</span>
+                <strong>{{ "%.2f"|format(total_allocated) }}</strong>
+            </div>
+            <div>
+                <span class="summary__label">Average risk</span>
+                <strong>{{ "%.1f"|format(average_risk) }}/5</strong>
+            </div>
+            <div>
+                <span class="summary__label">Assets selected</span>
+                <strong>{{ recommendations|length }}</strong>
+            </div>
+        </div>
+
         <table>
             <thead>
             <tr>
@@ -19,6 +34,8 @@
                 <th>Country</th>
                 <th>Sector</th>
                 <th>Risk</th>
+                <th>Expense</th>
+                <th>Share</th>
                 <th>Allocated amount</th>
             </tr>
             </thead>
@@ -28,5 +45,15 @@
             {% endfor %}
             </tbody>
         </table>
+    {% elif submitted and form.errors %}
+        <div class="empty-state">
+            <h3>Check the form</h3>
+            <p>One or more fields need a valid value before a recommendation can be generated.</p>
+        </div>
+    {% elif submitted %}
+        <div class="empty-state">
+            <h3>No recommendation found</h3>
+            <p>Try a higher maximum risk, fewer filters, or a broader search pattern.</p>
+        </div>
     {% endif %}
 {% endblock %}

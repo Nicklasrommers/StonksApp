@@ -42,7 +42,6 @@
     --font-h1: 4rem;
 
     --box-shadow: 5px 5px 10px -5px var(--gray);
-    /*--box-shadow-depth: 0px 0px 50px 0px var(--gray-light);*/
     --box-shadow-depth: 0px 0px 45px 20px var(--gray-light);
 }
 

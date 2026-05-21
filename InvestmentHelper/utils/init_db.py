@@ -4,18 +4,19 @@ import os
 import psycopg2
 from dotenv import load_dotenv
 
-load_dotenv()
+base_dir = os.path.dirname(__file__)
+load_dotenv(os.path.join(base_dir, '..', '.env'))
 
 
 if __name__ == '__main__':
     conn = psycopg2.connect(
         host=os.getenv('DB_HOST', 'localhost'),
+        port=os.getenv('DB_PORT', '5432'),
         database=os.getenv('DB_NAME', 'InvestmentHelper'),
         user=os.getenv('DB_USERNAME', 'postgres'),
         password=os.getenv('DB_PASSWORD', 'postgres'),
     )
 
-    base_dir = os.path.dirname(__file__)
     dataset_path = os.path.join(base_dir, '..', 'dataset', 'assets.csv')
 
     with conn.cursor() as cur:

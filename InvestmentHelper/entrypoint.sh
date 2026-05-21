@@ -1,9 +1,7 @@
-#!/bin/bash
+#!/bin/sh
 
-cd /code/InvestmentHelper/utils
+set -eu
 
-python init_db.py
+python /app/InvestmentHelper/utils/init_db.py
 
-cd /code/InvestmentHelper
-
-flask run --host=0.0.0.0
+python -m flask --app InvestmentHelper.app run --host=0.0.0.0 --port=8000

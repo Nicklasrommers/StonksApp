@@ -1,14 +1,14 @@
 .assets {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
     grid-gap: var(--margin-md);
+    margin-top: var(--margin-lg);
 }
+
 .card {
     border: 1px solid var(--black);
     border-radius: var(--border-radius);
-    padding: var(--margin-sm);
-    display: grid;
-    grid-template-columns: 3fr 1fr;
+    padding: var(--margin-md);
 }
 
 .card__info {

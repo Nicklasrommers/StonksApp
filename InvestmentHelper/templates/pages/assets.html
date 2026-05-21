@@ -17,8 +17,16 @@
             {% for asset in assets %}
                 {{ asset_card(asset=asset) }}
             {% endfor %}
+        {% elif searched %}
+            <div class="empty-state">
+                <h3>No matching assets</h3>
+                <p>Try widening the filters or removing the search pattern.</p>
+            </div>
         {% else %}
-            <h3 class="text--gray">Use the filters above to search for assets.</h3>
+            <div class="empty-state">
+                <h3>Ready to search</h3>
+                <p>Use the filters above to explore the available investment assets.</p>
+            </div>
         {% endif %}
     </div>
 {% endblock %}

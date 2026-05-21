@@ -5,6 +5,8 @@ MAX_RECOMMENDATION_ITEMS = 4
 
 
 def _empty_to_none(value):
+    if isinstance(value, str):
+        value = value.strip()
     return value if value not in (None, '', 'all') else None
 
 
@@ -20,11 +22,10 @@ def _select_diversified_assets(assets, target_risk, limit=MAX_RECOMMENDATION_ITE
     ranked_assets = sorted(
         assets,
         key=lambda asset: (
-            _asset_score(asset, target_risk),
-            -float(asset.expense_ratio or 0),
+            -_asset_score(asset, target_risk),
+            float(asset.expense_ratio or 0),
             asset.ticker,
         ),
-        reverse=True,
     )
     selected = []
     used_sectors = set()
@@ -33,7 +34,7 @@ def _select_diversified_assets(assets, target_risk, limit=MAX_RECOMMENDATION_ITE
     for asset in ranked_assets:
         if len(selected) >= limit:
             break
-        if asset.sector in used_sectors and asset.country in used_countries:
+        if asset.sector in used_sectors or asset.country in used_countries:
             continue
         selected.append(asset)
         used_sectors.add(asset.sector)
@@ -49,8 +50,15 @@ def _select_diversified_assets(assets, target_risk, limit=MAX_RECOMMENDATION_ITE
 
 
 def _build_weighted_allocations(amount, assets, target_risk):
+    if not assets:
+        return []
     scores = [_asset_score(asset, target_risk) for asset in assets]
     total_score = sum(scores)
+    if not total_score:
+        allocations = [round(float(amount) / len(assets), 2) for asset in assets]
+        rounding_difference = round(float(amount) - sum(allocations), 2)
+        allocations[0] = round(allocations[0] + rounding_difference, 2)
+        return allocations
     allocations = [
         round(float(amount) * score / total_score, 2)
         for score in scores
@@ -138,7 +146,7 @@ def create_recommendation(request_data):
 def get_recommendation_items(request_pk):
     sql = """
     SELECT ri.pk, ri.request_pk, ri.asset_pk, ri.allocated_amount,
-           a.ticker, a.name, a.asset_type, a.country, a.sector, a.risk_level
+           a.ticker, a.name, a.asset_type, a.country, a.sector, a.risk_level, a.expense_ratio
     FROM RecommendationItems ri
     JOIN Assets a ON a.pk = ri.asset_pk
     WHERE ri.request_pk = %s

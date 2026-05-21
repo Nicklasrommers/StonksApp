@@ -47,7 +47,7 @@ a, a:visited, a:focus, a:active {
 .btn, a.btn {
     background-color: var(--green);
     color: var(--white);
-    display: grid;;
+    display: grid;
     place-items: center;
     border-radius: var(--border-radius);
     border: none;
@@ -122,4 +122,54 @@ img {
 
 [hidden] {
     display: none !important;
+}
+
+.empty-state {
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    padding: var(--margin-md);
+    margin-top: var(--margin-lg);
+    background-color: white;
+}
+
+.empty-state p {
+    color: var(--gray-dark);
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: var(--margin-md);
+    margin: var(--margin-lg) 0;
+}
+
+.summary > div {
+    border: 1px solid var(--gray-light);
+    border-radius: var(--border-radius);
+    padding: var(--margin-md);
+    background-color: white;
+}
+
+.summary__label {
+    display: block;
+    color: var(--gray-dark);
+    font-size: var(--font-sm);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--margin-lg);
+    background-color: white;
+}
+
+th, td {
+    border-bottom: 1px solid var(--gray-light);
+    padding: var(--margin-sm);
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    color: var(--gray-dark);
 }

@@ -49,3 +49,4 @@ class RecommendationItem(ModelMixin):
         self.country = item_data.get('country')
         self.sector = item_data.get('sector')
         self.risk_level = item_data.get('risk_level')
+        self.expense_ratio = item_data.get('expense_ratio')

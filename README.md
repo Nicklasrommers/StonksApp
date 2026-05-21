@@ -11,33 +11,46 @@ The asset data is stored in `InvestmentHelper/dataset/assets.csv`.
 The data comes from Yahoo Finance and JustETF. We manually collected the data and combined it
 into one CSV file, where we adapted it to the fields required by the application.
 
-## Recommended Setup With Docker
-
-This is the easiest way to run the project because Docker starts both PostgreSQL and the Flask app.
+## Recommended Setup
 
 Requirements:
 
-- Docker
-- Docker Compose
+- Git
+- Docker Desktop, or Docker Engine with Docker Compose
 
-Run the app:
+Clone the repository:
 
 ```shell
-cd InvestmentHelper
-docker compose up --build
+git clone https://github.com/Nicklasrommers/StonksApp.git
+cd StonksApp
 ```
 
-The app initializes the database automatically from `InvestmentHelper/utils/schema.sql` and
-`InvestmentHelper/dataset/assets.csv`.
+Start the app:
+
+```shell
+docker compose up --build
+```
 
 Open the web app at:
 
 ```text
-http://127.0.0.1:5000
+http://127.0.0.1:8000
 ```
 
-Stop the app with `CTRL+C`.
+Stop the app with `CTRL+C`. To remove the stopped containers afterwards:
 
+```shell
+docker compose down
+```
+
+The database is initialized automatically from `InvestmentHelper/utils/schema.sql` and
+`InvestmentHelper/dataset/assets.csv` when the web container starts.
+
+The environment variables used by Docker are defined in `docker-compose.yml`. A matching example
+is available in `InvestmentHelper/.env.example` for reference.
+
+If the browser shows a blank page, make sure you are opening `http://127.0.0.1:8000`.
+The Flask app runs on port `8000` inside Docker and Docker publishes the same port on your computer.
 
 ## How To Use The App
 
