@@ -1,9 +1,64 @@
 from InvestmentHelper import conn, db_cursor
 from InvestmentHelper.models import Asset, RecommendationItem, RecommendationRequest
 
+MAX_RECOMMENDATION_ITEMS = 4
+
 
 def _empty_to_none(value):
     return value if value not in (None, '', 'all') else None
+
+
+def _asset_score(asset, target_risk):
+    risk_distance = abs(target_risk - int(asset.risk_level))
+    risk_score = 1 / (1 + risk_distance)
+    expense_score = max(0.5, 1 - float(asset.expense_ratio or 0) * 100)
+    type_bonus = 1.15 if str(asset.asset_type).lower() == 'etf' else 1
+    return risk_score * expense_score * type_bonus
+
+
+def _select_diversified_assets(assets, target_risk, limit=MAX_RECOMMENDATION_ITEMS):
+    ranked_assets = sorted(
+        assets,
+        key=lambda asset: (
+            _asset_score(asset, target_risk),
+            -float(asset.expense_ratio or 0),
+            asset.ticker,
+        ),
+        reverse=True,
+    )
+    selected = []
+    used_sectors = set()
+    used_countries = set()
+
+    for asset in ranked_assets:
+        if len(selected) >= limit:
+            break
+        if asset.sector in used_sectors and asset.country in used_countries:
+            continue
+        selected.append(asset)
+        used_sectors.add(asset.sector)
+        used_countries.add(asset.country)
+
+    for asset in ranked_assets:
+        if len(selected) >= limit:
+            break
+        if asset not in selected:
+            selected.append(asset)
+
+    return selected
+
+
+def _build_weighted_allocations(amount, assets, target_risk):
+    scores = [_asset_score(asset, target_risk) for asset in assets]
+    total_score = sum(scores)
+    allocations = [
+        round(float(amount) * score / total_score, 2)
+        for score in scores
+    ]
+    rounding_difference = round(float(amount) - sum(allocations), 2)
+    if allocations:
+        allocations[0] = round(allocations[0] + rounding_difference, 2)
+    return allocations
 
 
 def get_assets_by_filters(asset_type=None, country=None, sector=None, risk_level=None, search_pattern=None, limit=None):
@@ -62,19 +117,20 @@ def insert_recommendation_item(request_pk, asset_pk, allocated_amount):
 
 def create_recommendation(request_data):
     request_pk = insert_recommendation_request(request_data)
-    assets = get_assets_by_filters(
+    candidates = get_assets_by_filters(
         asset_type=request_data.get('asset_type'),
         country=request_data.get('country'),
         sector=request_data.get('sector'),
         risk_level=request_data.get('risk_level'),
         search_pattern=request_data.get('search_pattern'),
-        limit=4,
     )
-    if not assets:
+    if not candidates:
         return []
 
-    allocation = round(float(request_data.get('amount')) / len(assets), 2)
-    for asset in assets:
+    target_risk = int(request_data.get('risk_level'))
+    assets = _select_diversified_assets(candidates, target_risk)
+    allocations = _build_weighted_allocations(request_data.get('amount'), assets, target_risk)
+    for asset, allocation in zip(assets, allocations):
         insert_recommendation_item(request_pk, asset.pk, allocation)
     return get_recommendation_items(request_pk)
 

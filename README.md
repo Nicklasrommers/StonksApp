@@ -44,6 +44,7 @@ flask --app app run
 
 The E/R diagram is in [`docs/er-diagram.md`](docs/er-diagram.md).
 The schema is in `InvestmentHelper/utils/schema.sql` and the seed data is in `InvestmentHelper/dataset/assets.csv`.
+The asset data comes from Yahoo Finance and JustETF. We manually collected the data and combined it into one CSV file, where we adapted it to the fields required by the application.
 The app uses SQL `SELECT` and `INSERT`, plus the PostgreSQL regex operator `~*` in the asset search.
 It also defines the view `vw_assets`.
 

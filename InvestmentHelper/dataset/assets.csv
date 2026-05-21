@@ -1,11 +1,51 @@
 ticker,name,asset_type,country,sector,risk_level,expense_ratio
+MSFT,Microsoft,Stock,USA,Technology,4,0
+AAPL,Apple,Stock,USA,Technology,4,0
+GOOGL,Alphabet,Stock,USA,Technology,4,0
+AMZN,Amazon,Stock,USA,Consumer Cyclical,4,0
+META,Meta Platforms,Stock,USA,Technology,5,0
+NVDA,NVIDIA,Stock,USA,Technology,5,0
+TSLA,Tesla,Stock,USA,Consumer Cyclical,5,0
+JNJ,Johnson & Johnson,Stock,USA,Health Care,2,0
+JPM,JPMorgan Chase,Stock,USA,Financial Services,3,0
+KO,Coca-Cola,Stock,USA,Consumer Defensive,2,0
+PEP,PepsiCo,Stock,USA,Consumer Defensive,2,0
+WMT,Walmart,Stock,USA,Consumer Defensive,2,0
+XOM,Exxon Mobil,Stock,USA,Energy,4,0
+CVX,Chevron,Stock,USA,Energy,4,0
+PG,Procter & Gamble,Stock,USA,Consumer Defensive,2,0
+DIS,Disney,Stock,USA,Communication Services,3,0
+NFLX,Netflix,Stock,USA,Communication Services,5,0
+V,Visa,Stock,USA,Financial Services,3,0
+MA,Mastercard,Stock,USA,Financial Services,3,0
+HD,Home Depot,Stock,USA,Consumer Cyclical,3,0
+NOVO-B,Novo Nordisk,Stock,Denmark,Health Care,3,0
+VWS,Vestas Wind Systems,Stock,Denmark,Industrials,5,0
+MAERSK-B,A.P. Moller Maersk,Stock,Denmark,Industrials,4,0
+DSV,DSV,Stock,Denmark,Industrials,3,0
+ORSTED,Orsted,Stock,Denmark,Utilities,4,0
+SAP,SAP,Stock,Germany,Technology,3,0
+ASML,ASML Holding,Stock,Netherlands,Technology,4,0
+NESN,Nestle,Stock,Switzerland,Consumer Defensive,2,0
+ROG,Roche,Stock,Switzerland,Health Care,2,0
+MC,LVMH,Stock,France,Consumer Cyclical,3,0
+AIR,Airbus,Stock,France,Industrials,4,0
+SHEL,Shell,Stock,UK,Energy,3,0
+BP,BP,Stock,UK,Energy,4,0
+SONY,Sony Group,Stock,Japan,Technology,3,0
+TM,Toyota Motor,Stock,Japan,Consumer Cyclical,2,0
 IUSQ,iShares MSCI ACWI UCITS ETF,ETF,Global,Diversified,3,0.0020
-SXR8,iShares Core S&P 500 UCITS ETF,ETF,USA,Diversified,3,0.0007
 EUNL,iShares Core MSCI World UCITS ETF,ETF,Global,Diversified,3,0.0020
-NDX,Nasdaq 100 ETF,ETF,USA,Technology,4,0.0020
-NOVO-B,Novo Nordisk,Stock,Denmark,Health Care,3,0.0000
-MSFT,Microsoft,Stock,USA,Technology,4,0.0000
-AAPL,Apple,Stock,USA,Technology,4,0.0000
-JNJ,Johnson & Johnson,Stock,USA,Health Care,2,0.0000
-VWS,Vestas Wind Systems,Stock,Denmark,Energy,5,0.0000
-MAERSK-B,A.P. Moller Maersk,Stock,Denmark,Industrials,4,0.0000
+SXR8,iShares Core S&P 500 UCITS ETF,ETF,USA,Diversified,3,0.0007
+QDVE,iShares S&P 500 Information Technology Sector ETF,ETF,USA,Technology,4,0.0015
+EXSA,iShares STOXX Europe 600 UCITS ETF,ETF,Europe,Diversified,3,0.0020
+IS3N,iShares Core MSCI EM IMI UCITS ETF,ETF,Emerging Markets,Diversified,4,0.0018
+EIMI,iShares Core MSCI Emerging Markets IMI ETF,ETF,Emerging Markets,Diversified,4,0.0018
+VUAA,Vanguard S&P 500 UCITS ETF,ETF,USA,Diversified,3,0.0007
+VWCE,Vanguard FTSE All-World UCITS ETF,ETF,Global,Diversified,3,0.0022
+VUSA,Vanguard S&P 500 UCITS ETF,ETF,USA,Diversified,3,0.0007
+2B76,Xtrackers MSCI World UCITS ETF,ETF,Global,Diversified,3,0.0019
+SPY,SPDR S&P 500 ETF,ETF,USA,Diversified,3,0.0009
+QQQ,Invesco QQQ Trust,ETF,USA,Technology,4,0.0020
+IWM,iShares Russell 2000 ETF,ETF,USA,Small Cap,5,0.0019
+GLD,SPDR Gold Shares,ETF,Global,Commodities,2,0.0040
