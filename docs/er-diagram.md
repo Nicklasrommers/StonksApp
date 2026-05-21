@@ -6,7 +6,7 @@ erDiagram
     RECOMMENDATION_REQUESTS ||--o{ RECOMMENDATION_ITEMS : generates
 
     ASSETS {
-        serial pk PK
+        int asset_id PK
         varchar ticker UK
         varchar name
         varchar asset_type
@@ -17,7 +17,7 @@ erDiagram
     }
 
     RECOMMENDATION_REQUESTS {
-        serial pk PK
+        int request_id PK
         numeric amount
         integer risk_level
         varchar asset_type
@@ -28,7 +28,7 @@ erDiagram
     }
 
     RECOMMENDATION_ITEMS {
-        serial pk PK
+        int item_id PK
         integer request_pk FK
         integer asset_pk FK
         numeric allocated_amount
