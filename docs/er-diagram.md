@@ -1,7 +1,8 @@
 # E/R Diagram
 
 ```mermaid
-ASSETS ||--o{ RECOMMENDATION_ITEMS : contains
+erDiagram
+    ASSETS ||--o{ RECOMMENDATION_ITEMS : contains
     RECOMMENDATION_REQUESTS ||--o{ RECOMMENDATION_ITEMS : generates
 
     ASSETS {
