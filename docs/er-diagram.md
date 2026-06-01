@@ -2,11 +2,11 @@
 
 ```mermaid
 erDiagram
-    ASSETS ||--o{ RECOMMENDATION_ITEMS : contains
     RECOMMENDATION_REQUESTS ||--o{ RECOMMENDATION_ITEMS : generates
+    ASSETS ||--o{ RECOMMENDATION_ITEMS : included_in
 
     ASSETS {
-        int asset_id PK
+        int pk PK
         varchar ticker UK
         varchar name
         varchar asset_type
@@ -17,7 +17,7 @@ erDiagram
     }
 
     RECOMMENDATION_REQUESTS {
-        int request_id PK
+        int pk PK
         numeric amount
         integer risk_level
         varchar asset_type
@@ -28,7 +28,7 @@ erDiagram
     }
 
     RECOMMENDATION_ITEMS {
-        int item_id PK
+        int pk PK
         integer request_pk FK
         integer asset_pk FK
         numeric allocated_amount
