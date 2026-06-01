@@ -65,7 +65,7 @@ preferences, and the app returns up to four suggested assets with weighted alloc
 
 ## Database Model
 
-The E/R diagram is in [`docs/er-diagram.md`](docs/er-diagram.md).
+The E/R diagram is in [`er-diagram/er-diagram.md`](er-diagram/er-diagram.md).
 
 The schema is in `InvestmentHelper/utils/schema.sql`. It defines:
 
