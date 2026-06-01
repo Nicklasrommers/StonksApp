@@ -1,12 +1,11 @@
 # E/R Diagram
 
 ```mermaid
-erDiagram
+ASSETS ||--o{ RECOMMENDATION_ITEMS : contains
     RECOMMENDATION_REQUESTS ||--o{ RECOMMENDATION_ITEMS : generates
-    ASSETS ||--o{ RECOMMENDATION_ITEMS : included_in
 
     ASSETS {
-        int pk PK
+        int asset_id PK
         varchar ticker UK
         varchar name
         varchar asset_type
@@ -17,7 +16,7 @@ erDiagram
     }
 
     RECOMMENDATION_REQUESTS {
-        int pk PK
+        int request_id PK
         numeric amount
         integer risk_level
         varchar asset_type
@@ -28,7 +27,7 @@ erDiagram
     }
 
     RECOMMENDATION_ITEMS {
-        int pk PK
+        int item_id PK
         integer request_pk FK
         integer asset_pk FK
         numeric allocated_amount
